@@ -1,0 +1,4 @@
+<resources>
+
+    <style name="Theme.CountryPicker" parent="Theme.MaterialComponents.Light" />
+</resources>
