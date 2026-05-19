@@ -27,7 +27,6 @@ import com.njtech.countrypicker.data.repository.CountryRepository
 import com.njtech.countrypicker.ui.screens.CountryDetailScreen
 import com.njtech.countrypicker.ui.screens.CountryListScreen
 import com.njtech.countrypicker.ui.viewmodel.CountryViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -40,6 +39,8 @@ import kotlinx.coroutines.launch
  * @param showDetailPane Whether to show the detail view before selecting a country.
  * @param onDismiss Callback for when the picker is dismissed (especially in BottomSheet mode).
  * @param itemContent Optional custom Composable for rendering individual country items in the list.
+ * @param searchContent Optional custom Composable for rendering the search UI.
+ * @param listContainer Optional custom Composable for wrapping the list of countries.
  */
 @OptIn(ExperimentalMaterial3AdaptiveApi::class, ExperimentalMaterial3Api::class)
 @Composable
@@ -49,7 +50,9 @@ fun CountryPicker(
     mode: CountryPickerMode = CountryPickerMode.Fullscreen,
     showDetailPane: Boolean = false,
     onDismiss: (() -> Unit)? = null,
-    itemContent: (@Composable (Country) -> Unit)? = null
+    itemContent: (@Composable (Country) -> Unit)? = null,
+    searchContent: (@Composable (query: String, onQueryChange: (String) -> Unit) -> Unit)? = null,
+    listContainer: (@Composable (content: @Composable () -> Unit) -> Unit)? = null
 ) {
     val context = LocalContext.current.applicationContext
     val viewModel: CountryViewModel = viewModel(
@@ -93,7 +96,9 @@ fun CountryPicker(
                                 }
                             }
                         },
-                        itemContent = itemContent
+                        itemContent = itemContent,
+                        searchContent = searchContent,
+                        listContainer = listContainer
                     )
                 }
             },

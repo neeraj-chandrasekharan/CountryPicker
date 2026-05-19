@@ -6,16 +6,26 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
@@ -44,6 +54,8 @@ class MainActivity : ComponentActivity() {
                 var pickerMode by remember { mutableStateOf<CountryPickerMode>(CountryPickerMode.Fullscreen) }
                 var showDetailPane by remember { mutableStateOf(false) }
                 var useCustomItem by remember { mutableStateOf(false) }
+                var useCustomSearch by remember { mutableStateOf(false) }
+                var useCustomContainer by remember { mutableStateOf(false) }
 
                 BackHandler(showPicker) {
                     showPicker = false
@@ -69,7 +81,11 @@ class MainActivity : ComponentActivity() {
                         
                         Spacer(modifier = Modifier.padding(16.dp))
                         
-                        Row(verticalAlignment = Alignment.CenterVertically) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
                             Text("BottomSheet Mode")
                             Switch(
                                 checked = pickerMode == CountryPickerMode.BottomSheet,
@@ -79,7 +95,11 @@ class MainActivity : ComponentActivity() {
                             )
                         }
 
-                        Row(verticalAlignment = Alignment.CenterVertically) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
                             Text("Show Detail Pane")
                             Switch(
                                 checked = showDetailPane,
@@ -87,7 +107,11 @@ class MainActivity : ComponentActivity() {
                             )
                         }
 
-                        Row(verticalAlignment = Alignment.CenterVertically) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
                             Text("Use Custom Item Slot")
                             Switch(
                                 checked = useCustomItem,
@@ -95,6 +119,33 @@ class MainActivity : ComponentActivity() {
                             )
                         }
 
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Text("Use Custom Search Slot")
+                            Switch(
+                                checked = useCustomSearch,
+                                onCheckedChange = { useCustomSearch = it }
+                            )
+                        }
+
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Text("Use Custom List Container")
+                            Switch(
+                                checked = useCustomContainer,
+                                onCheckedChange = { useCustomContainer = it }
+                            )
+                        }
+
+                        Spacer(modifier = Modifier.padding(16.dp))
+
+                        HorizontalDivider()
                         Spacer(modifier = Modifier.padding(16.dp))
 
                         Button(onClick = { showPicker = true }) {
@@ -145,6 +196,33 @@ class MainActivity : ComponentActivity() {
                                                 )
                                             }
                                         }
+                                    }
+                                }
+                            } else null,
+                            searchContent = if (useCustomSearch) {
+                                { query, onQueryChange ->
+                                    OutlinedTextField(
+                                        value = query,
+                                        onValueChange = onQueryChange,
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .padding(16.dp),
+                                        label = { Text("Search Globally...") },
+                                        leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
+                                        shape = RoundedCornerShape(24.dp)
+                                    )
+                                }
+                            } else null,
+                            listContainer = if (useCustomContainer) {
+                                { content ->
+                                    Box(
+                                        modifier = Modifier
+                                            .fillMaxSize()
+                                            .padding(8.dp)
+                                            .border(2.dp, MaterialTheme.colorScheme.primary, RoundedCornerShape(8.dp))
+                                            .background(MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.1f))
+                                    ) {
+                                        content()
                                     }
                                 }
                             } else null

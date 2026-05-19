@@ -35,19 +35,31 @@ fun CountryListScreen(
     onSearchQueryChange: (String) -> Unit,
     onCountryClick: (Country) -> Unit,
     modifier: Modifier = Modifier,
-    itemContent: (@Composable (Country) -> Unit)? = null
+    itemContent: (@Composable (Country) -> Unit)? = null,
+    searchContent: (@Composable (query: String, onQueryChange: (String) -> Unit) -> Unit)? = null,
+    listContainer: (@Composable (content: @Composable () -> Unit) -> Unit)? = null
 ) {
     val topPadding = WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
 
     Column(modifier = modifier.fillMaxSize()) {
-        SearchBar(
-            query = uiState.searchQuery,
-            onQueryChange = onSearchQueryChange,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp)
-                .padding(top = topPadding + 16.dp, bottom = 16.dp)
-        )
+        if (searchContent != null) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = topPadding)
+            ) {
+                searchContent(uiState.searchQuery, onSearchQueryChange)
+            }
+        } else {
+            DefaultSearchBar(
+                query = uiState.searchQuery,
+                onQueryChange = onSearchQueryChange,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp)
+                    .padding(top = topPadding + 16.dp, bottom = 16.dp)
+            )
+        }
 
         Box(modifier = Modifier.fillMaxSize()) {
             if (uiState.isLoading) {
@@ -61,24 +73,32 @@ fun CountryListScreen(
                         .padding(16.dp)
                 )
             } else {
-                LazyColumn {
-                    items(uiState.countries, key = { it.code }) { country ->
-                        if (itemContent != null) {
-                            Box(modifier = Modifier.clickable { onCountryClick(country) }) {
-                                itemContent(country)
+                val listContent = @Composable {
+                    LazyColumn(modifier = Modifier.fillMaxSize()) {
+                        items(uiState.countries, key = { it.code }) { country ->
+                            if (itemContent != null) {
+                                Box(modifier = Modifier.clickable { onCountryClick(country) }) {
+                                    itemContent(country)
+                                }
+                            } else {
+                                DefaultCountryItem(
+                                    country = country,
+                                    onClick = { onCountryClick(country) }
+                                )
                             }
-                        } else {
-                            DefaultCountryItem(
-                                country = country,
-                                onClick = { onCountryClick(country) }
+                            HorizontalDivider(
+                                modifier = Modifier.padding(horizontal = 16.dp),
+                                thickness = 0.5.dp,
+                                color = MaterialTheme.colorScheme.outlineVariant
                             )
                         }
-                        HorizontalDivider(
-                            modifier = Modifier.padding(horizontal = 16.dp),
-                            thickness = 0.5.dp,
-                            color = MaterialTheme.colorScheme.outlineVariant
-                        )
                     }
+                }
+
+                if (listContainer != null) {
+                    listContainer(listContent)
+                } else {
+                    listContent()
                 }
             }
         }
@@ -86,7 +106,7 @@ fun CountryListScreen(
 }
 
 @Composable
-fun SearchBar(
+fun DefaultSearchBar(
     query: String,
     onQueryChange: (String) -> Unit,
     modifier: Modifier = Modifier
