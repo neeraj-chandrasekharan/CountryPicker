@@ -33,6 +33,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -50,12 +51,12 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             CountryPickerTheme {
-                var showPicker by remember { mutableStateOf(false) }
-                var pickerMode by remember { mutableStateOf<CountryPickerMode>(CountryPickerMode.Fullscreen) }
-                var showDetailPane by remember { mutableStateOf(false) }
-                var useCustomItem by remember { mutableStateOf(false) }
-                var useCustomSearch by remember { mutableStateOf(false) }
-                var useCustomContainer by remember { mutableStateOf(false) }
+                var showPicker by rememberSaveable { mutableStateOf(false) }
+                var pickerMode by rememberSaveable { mutableStateOf<CountryPickerMode>(CountryPickerMode.Fullscreen) }
+                var showDetailPane by rememberSaveable { mutableStateOf(false) }
+                var useCustomItem by rememberSaveable { mutableStateOf(false) }
+                var useCustomSearch by rememberSaveable { mutableStateOf(false) }
+                var useCustomContainer by rememberSaveable { mutableStateOf(false) }
 
                 BackHandler(showPicker) {
                     showPicker = false
