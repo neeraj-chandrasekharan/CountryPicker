@@ -34,7 +34,8 @@ fun CountryListScreen(
     uiState: CountryUiState,
     onSearchQueryChange: (String) -> Unit,
     onCountryClick: (Country) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    itemContent: (@Composable (Country) -> Unit)? = null
 ) {
     val topPadding = WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
 
@@ -62,10 +63,16 @@ fun CountryListScreen(
             } else {
                 LazyColumn {
                     items(uiState.countries, key = { it.code }) { country ->
-                        CountryItem(
-                            country = country,
-                            onClick = { onCountryClick(country) }
-                        )
+                        if (itemContent != null) {
+                            Box(modifier = Modifier.clickable { onCountryClick(country) }) {
+                                itemContent(country)
+                            }
+                        } else {
+                            DefaultCountryItem(
+                                country = country,
+                                onClick = { onCountryClick(country) }
+                            )
+                        }
                         HorizontalDivider(
                             modifier = Modifier.padding(horizontal = 16.dp),
                             thickness = 0.5.dp,
@@ -96,7 +103,7 @@ fun SearchBar(
 }
 
 @Composable
-fun CountryItem(
+fun DefaultCountryItem(
     country: Country,
     onClick: () -> Unit,
     modifier: Modifier = Modifier

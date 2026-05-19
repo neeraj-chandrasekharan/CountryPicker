@@ -42,9 +42,9 @@ android {
 }
 
 dependencies {
-//    implementation(project(":library"))
+    implementation(project(":library"))
 
-    implementation(libs.library)
+//    implementation(libs.library)
 
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.activity.compose)
