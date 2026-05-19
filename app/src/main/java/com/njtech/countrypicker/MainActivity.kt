@@ -1,5 +1,6 @@
 package com.njtech.countrypicker
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
@@ -13,10 +14,13 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Button
@@ -29,6 +33,8 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
+import androidx.compose.material3.VerticalDivider
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -37,6 +43,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -52,11 +59,14 @@ class MainActivity : ComponentActivity() {
         setContent {
             CountryPickerTheme {
                 var showPicker by rememberSaveable { mutableStateOf(false) }
-                var pickerMode by rememberSaveable { mutableStateOf<CountryPickerMode>(CountryPickerMode.Fullscreen) }
+                var pickerMode by rememberSaveable { mutableStateOf(CountryPickerMode.Fullscreen) }
                 var showDetailPane by rememberSaveable { mutableStateOf(false) }
                 var useCustomItem by rememberSaveable { mutableStateOf(false) }
                 var useCustomSearch by rememberSaveable { mutableStateOf(false) }
                 var useCustomContainer by rememberSaveable { mutableStateOf(false) }
+
+                val configuration = LocalConfiguration.current
+                val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
 
                 BackHandler(showPicker) {
                     showPicker = false
@@ -75,82 +85,97 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier
                             .fillMaxSize()
                             .padding(innerPadding)
-                            .padding(16.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        Text(text = "CountryPicker Demo", style = MaterialTheme.typography.headlineLarge)
-                        
-                        Spacer(modifier = Modifier.padding(16.dp))
-                        
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.SpaceBetween
-                        ) {
-                            Text("BottomSheet Mode")
-                            Switch(
-                                checked = pickerMode == CountryPickerMode.BottomSheet,
-                                onCheckedChange = { 
-                                    pickerMode = if (it) CountryPickerMode.BottomSheet else CountryPickerMode.Fullscreen 
+                        Text(
+                            text = "CountryPicker Demo",
+                            style = MaterialTheme.typography.headlineLarge,
+                            modifier = Modifier
+                                .padding(16.dp)
+                                .align(Alignment.CenterHorizontally)
+                        )
+
+                        if (isLandscape) {
+                            Row(
+                                modifier = Modifier.fillMaxSize(),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                // Left side: Configuration (60% weight)
+                                Column(
+                                    modifier = Modifier
+                                        .weight(0.6f)
+                                        .fillMaxHeight()
+                                        .verticalScroll(rememberScrollState())
+                                        .padding(16.dp),
+                                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                                ) {
+                                    ConfigurationSwitches(
+                                        pickerMode = pickerMode,
+                                        onPickerModeChange = { pickerMode = it },
+                                        showDetailPane = showDetailPane,
+                                        onShowDetailPaneChange = { showDetailPane = it },
+                                        useCustomItem = useCustomItem,
+                                        onUseCustomItemChange = { useCustomItem = it },
+                                        useCustomSearch = useCustomSearch,
+                                        onUseCustomSearchChange = { useCustomSearch = it },
+                                        useCustomContainer = useCustomContainer,
+                                        onUseCustomContainerChange = { useCustomContainer = it }
+                                    )
                                 }
-                            )
-                        }
 
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.SpaceBetween
-                        ) {
-                            Text("Show Detail Pane")
-                            Switch(
-                                checked = showDetailPane,
-                                onCheckedChange = { showDetailPane = it }
-                            )
-                        }
+                                VerticalDivider()
 
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.SpaceBetween
-                        ) {
-                            Text("Use Custom Item Slot")
-                            Switch(
-                                checked = useCustomItem,
-                                onCheckedChange = { useCustomItem = it }
-                            )
-                        }
+                                // Right side: Action Button (40% weight)
+                                Box(
+                                    modifier = Modifier
+                                        .weight(0.4f)
+                                        .fillMaxHeight(),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Button(onClick = { showPicker = true }) {
+                                        Text("Open Country Picker")
+                                    }
+                                }
+                            }
+                        } else {
+                            // Portrait Mode
+                            Column(
+                                modifier = Modifier.fillMaxSize(),
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+                                Column(
+                                    modifier = Modifier
+                                        .weight(1f)
+                                        .verticalScroll(rememberScrollState())
+                                        .padding(16.dp),
+                                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                                ) {
+                                    ConfigurationSwitches(
+                                        pickerMode = pickerMode,
+                                        onPickerModeChange = { pickerMode = it },
+                                        showDetailPane = showDetailPane,
+                                        onShowDetailPaneChange = { showDetailPane = it },
+                                        useCustomItem = useCustomItem,
+                                        onUseCustomItemChange = { useCustomItem = it },
+                                        useCustomSearch = useCustomSearch,
+                                        onUseCustomSearchChange = { useCustomSearch = it },
+                                        useCustomContainer = useCustomContainer,
+                                        onUseCustomContainerChange = { useCustomContainer = it }
+                                    )
+                                }
 
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.SpaceBetween
-                        ) {
-                            Text("Use Custom Search Slot")
-                            Switch(
-                                checked = useCustomSearch,
-                                onCheckedChange = { useCustomSearch = it }
-                            )
-                        }
-
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.SpaceBetween
-                        ) {
-                            Text("Use Custom List Container")
-                            Switch(
-                                checked = useCustomContainer,
-                                onCheckedChange = { useCustomContainer = it }
-                            )
-                        }
-
-                        Spacer(modifier = Modifier.padding(16.dp))
-
-                        HorizontalDivider()
-                        Spacer(modifier = Modifier.padding(16.dp))
-
-                        Button(onClick = { showPicker = true }) {
-                            Text("Open Country Picker")
+                                HorizontalDivider()
+                                
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(32.dp),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Button(onClick = { showPicker = true }) {
+                                        Text("Open Country Picker")
+                                    }
+                                }
+                            }
                         }
                     }
 
@@ -232,5 +257,63 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+    }
+}
+
+@Composable
+fun ConfigurationSwitches(
+    pickerMode: CountryPickerMode,
+    onPickerModeChange: (CountryPickerMode) -> Unit,
+    showDetailPane: Boolean,
+    onShowDetailPaneChange: (Boolean) -> Unit,
+    useCustomItem: Boolean,
+    onUseCustomItemChange: (Boolean) -> Unit,
+    useCustomSearch: Boolean,
+    onUseCustomSearchChange: (Boolean) -> Unit,
+    useCustomContainer: Boolean,
+    onUseCustomContainerChange: (Boolean) -> Unit
+) {
+    ConfigSwitch(
+        label = "BottomSheet Mode",
+        checked = pickerMode == CountryPickerMode.BottomSheet,
+        onCheckedChange = { 
+            onPickerModeChange(if (it) CountryPickerMode.BottomSheet else CountryPickerMode.Fullscreen) 
+        }
+    )
+    ConfigSwitch(
+        label = "Show Detail Pane",
+        checked = showDetailPane,
+        onCheckedChange = onShowDetailPaneChange
+    )
+    ConfigSwitch(
+        label = "Use Custom Item Slot",
+        checked = useCustomItem,
+        onCheckedChange = onUseCustomItemChange
+    )
+    ConfigSwitch(
+        label = "Use Custom Search Slot",
+        checked = useCustomSearch,
+        onCheckedChange = onUseCustomSearchChange
+    )
+    ConfigSwitch(
+        label = "Use Custom List Container",
+        checked = useCustomContainer,
+        onCheckedChange = onUseCustomContainerChange
+    )
+}
+
+@Composable
+fun ConfigSwitch(
+    label: String,
+    checked: Boolean,
+    onCheckedChange: (Boolean) -> Unit
+) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Text(label, style = MaterialTheme.typography.bodyLarge)
+        Switch(checked = checked, onCheckedChange = onCheckedChange)
     }
 }
