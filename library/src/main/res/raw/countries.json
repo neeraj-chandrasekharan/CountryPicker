@@ -59,7 +59,8 @@
             "ru": "Американское Самоа",
             "zh": "美属萨摩亚"
         },
-        "dialCode": "+1684",
+        "dialCode": "+1",
+        "areaCode": "684",
         "code": "AS",
         "flag": "🇦🇸"
     },
@@ -107,25 +108,10 @@
             "ru": "Ангилья",
             "zh": "安圭拉"
         },
-        "dialCode": "+1264",
+        "dialCode": "+1",
+        "areaCode": "264",
         "code": "AI",
         "flag": "🇦🇮"
-    },
-    {
-        "name": {
-            "en": "Antarctica",
-            "fr": "Antarctique",
-            "es": "Antártida",
-            "de": "Antarktis",
-            "it": "Antartide",
-            "ja": "南極大陸",
-            "pt": "Antártida",
-            "ru": "Антарктида",
-            "zh": "南极洲"
-        },
-        "dialCode": "",
-        "code": "AQ",
-        "flag": "🇦🇶"
     },
     {
         "name": {
@@ -139,7 +125,8 @@
             "ru": "Антигуа и Барбуда",
             "zh": "安提瓜和巴布达"
         },
-        "dialCode": "+1268",
+        "dialCode": "+1",
+        "areaCode": "268",
         "code": "AG",
         "flag": "🇦🇬"
     },
@@ -251,7 +238,8 @@
             "ru": "Багамские Острова",
             "zh": "巴哈马"
         },
-        "dialCode": "+1242",
+        "dialCode": "+1",
+        "areaCode": "242",
         "code": "BS",
         "flag": "🇧🇸"
     },
@@ -299,7 +287,8 @@
             "ru": "Барбадос",
             "zh": "巴巴多斯"
         },
-        "dialCode": "+1246",
+        "dialCode": "+1",
+        "areaCode": "246",
         "code": "BB",
         "flag": "🇧🇧"
     },
@@ -379,7 +368,8 @@
             "ru": "Бермудские Острова",
             "zh": "百慕大"
         },
-        "dialCode": "+1441",
+        "dialCode": "+1",
+        "areaCode": "441",
         "code": "BM",
         "flag": "🇧🇲"
     },
@@ -507,7 +497,8 @@
             "ru": "Британские Виргинские острова",
             "zh": "英属维尔京群岛"
         },
-        "dialCode": "+1284",
+        "dialCode": "+1",
+        "areaCode": "284",
         "code": "VG",
         "flag": "🇻🇬"
     },
@@ -619,7 +610,8 @@
             "ru": "Канада",
             "zh": "加拿大"
         },
-        "dialCode": "+1204",
+        "dialCode": "+1",
+        "areaCode": "204",
         "code": "CA",
         "flag": "🇨🇦"
     },
@@ -653,7 +645,7 @@
         },
         "dialCode": "+599",
         "code": "BQ",
-        "flag": ""
+        "flag": "🇳🇱"
     },
     {
         "name": {
@@ -667,7 +659,8 @@
             "ru": "Каймановы острова",
             "zh": "开曼群岛"
         },
-        "dialCode": "+1345",
+        "dialCode": "+1",
+        "areaCode": "345",
         "code": "KY",
         "flag": "🇰🇾"
     },
@@ -987,7 +980,8 @@
             "ru": "Доминика",
             "zh": "多米尼加"
         },
-        "dialCode": "+1767",
+        "dialCode": "+1",
+        "areaCode": "767",
         "code": "DM",
         "flag": "🇩🇲"
     },
@@ -1003,7 +997,8 @@
             "ru": "Доминиканская Республика",
             "zh": "多明尼加"
         },
-        "dialCode": "+1809",
+        "dialCode": "+1",
+        "areaCode": "809",
         "code": "DO",
         "flag": "🇩🇴"
     },
@@ -1403,7 +1398,8 @@
             "ru": "Гренада",
             "zh": "格林纳达"
         },
-        "dialCode": "+1473",
+        "dialCode": "+1",
+        "areaCode": "473",
         "code": "GD",
         "flag": "🇬🇩"
     },
@@ -1435,7 +1431,8 @@
             "ru": "Гуам",
             "zh": "关岛"
         },
-        "dialCode": "+1671",
+        "dialCode": "+1",
+        "areaCode": "671",
         "code": "GU",
         "flag": "🇬🇺"
     },
@@ -1534,22 +1531,6 @@
         "dialCode": "+509",
         "code": "HT",
         "flag": "🇭🇹"
-    },
-    {
-        "name": {
-            "en": "Heard Island and McDonald Islands",
-            "fr": "Îles Heard-et-MacDonald",
-            "es": "Islas Heard y McDonald",
-            "de": "Heard und die McDonaldinseln",
-            "it": "Isole Heard e McDonald",
-            "ja": "ハード島とマクドナルド諸島",
-            "pt": "Ilha Heard e Ilhas McDonald",
-            "ru": "Остров Херд и острова Макдональд",
-            "zh": "赫德岛和麦当劳群岛"
-        },
-        "dialCode": "",
-        "code": "HM",
-        "flag": "🇭🇲"
     },
     {
         "name": {
@@ -1771,7 +1752,8 @@
             "ru": "Ямайка",
             "zh": "牙买加"
         },
-        "dialCode": "+1876",
+        "dialCode": "+1",
+        "areaCode": "876",
         "code": "JM",
         "flag": "🇯🇲"
     },
@@ -2363,7 +2345,8 @@
             "ru": "Монтсеррат",
             "zh": "蒙特塞拉特"
         },
-        "dialCode": "+1664",
+        "dialCode": "+1",
+        "areaCode": "664",
         "code": "MS",
         "flag": "🇲🇸"
     },
@@ -2635,7 +2618,8 @@
             "ru": "Северные Марианские острова",
             "zh": "北马里亚纳群岛"
         },
-        "dialCode": "+1670",
+        "dialCode": "+1",
+        "areaCode": "670",
         "code": "MP",
         "flag": "🇲🇵"
     },
@@ -2859,7 +2843,8 @@
             "ru": "Пуэрто-Рико",
             "zh": "波多黎各"
         },
-        "dialCode": "+1787",
+        "dialCode": "+1",
+        "areaCode": "787",
         "code": "PR",
         "flag": "🇵🇷"
     },
@@ -2987,7 +2972,8 @@
             "ru": "Сент-Китс и Невис",
             "zh": "圣基茨和尼维斯"
         },
-        "dialCode": "+1869",
+        "dialCode": "+1",
+        "areaCode": "869",
         "code": "KN",
         "flag": "🇰🇳"
     },
@@ -3003,7 +2989,8 @@
             "ru": "Сент-Люсия",
             "zh": "圣卢西亚"
         },
-        "dialCode": "+1758",
+        "dialCode": "+1",
+        "areaCode": "758",
         "code": "LC",
         "flag": "🇱🇨"
     },
@@ -3051,7 +3038,8 @@
             "ru": "Сент-Винсент и Гренадины",
             "zh": "圣文森特和格林纳丁斯"
         },
-        "dialCode": "+1784",
+        "dialCode": "+1",
+        "areaCode": "784",
         "code": "VC",
         "flag": "🇻🇨"
     },
@@ -3195,7 +3183,8 @@
             "ru": "Синт-Мартен",
             "zh": "圣马丁岛"
         },
-        "dialCode": "+1721",
+        "dialCode": "+1",
+        "areaCode": "721",
         "code": "SX",
         "flag": "🇸🇽"
     },
@@ -3611,7 +3600,8 @@
             "ru": "Тринидад и Тобаго",
             "zh": "特立尼达和多巴哥"
         },
-        "dialCode": "+1868",
+        "dialCode": "+1",
+        "areaCode": "868",
         "code": "TT",
         "flag": "🇹🇹"
     },
@@ -3659,7 +3649,8 @@
             "ru": "Теркс и Кайкос",
             "zh": "特克斯和凯科斯群岛"
         },
-        "dialCode": "+1649",
+        "dialCode": "+1",
+        "areaCode": "649",
         "code": "TC",
         "flag": "🇹🇨"
     },
@@ -3771,7 +3762,8 @@
             "ru": "Соединённые Штаты Америки",
             "zh": "美国"
         },
-        "dialCode": "+1201",
+        "dialCode": "+1",
+        "areaCode": "201",
         "code": "US",
         "flag": "🇺🇸"
     },
@@ -3803,7 +3795,8 @@
             "ru": "Виргинские Острова",
             "zh": "美属维尔京群岛"
         },
-        "dialCode": "+1340",
+        "dialCode": "+1",
+        "areaCode": "340",
         "code": "VI",
         "flag": "🇻🇮"
     },

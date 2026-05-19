@@ -6,6 +6,7 @@ import kotlinx.serialization.Serializable
 data class Country(
     val name: Map<String, String>,
     val dialCode: String,
+    val areaCode: String? = null,
     val code: String,
     val flag: String
 )
