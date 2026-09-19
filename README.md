@@ -64,7 +64,7 @@ dependencyResolutionManagement {
 
 // app/build.gradle.kts
 dependencies {
-    implementation("com.github.neeraj-chandrasekharan.CountryPicker:library:1.1.1")
+    implementation("com.github.neeraj-chandrasekharan:CountryPicker:1.1.1")
 }
 ```
 
