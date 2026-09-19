@@ -48,10 +48,31 @@ Search is a case-insensitive "contains" match against any localized name, the IS
 
 ## Installation
 
-The library is the `:library` module and is configured for `maven-publish` as
-`com.njtech.countrypicker:library:1.0.1`. There are two ways to use it.
+### JitPack (recommended)
 
-**1. As a module in the same project** (what the demo app does)
+Add the JitPack repository, then the dependency.
+
+```kotlin
+// settings.gradle.kts
+dependencyResolutionManagement {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url = uri("https://jitpack.io") }
+    }
+}
+
+// app/build.gradle.kts
+dependencies {
+    implementation("com.github.neeraj-chandrasekharan.CountryPicker:library:1.1.0")
+}
+```
+
+Versions are the repository's release tags (for example `v1.1.0` is used as `1.1.0`).
+
+### Other options
+
+**As a module in the same project** (what the demo app does)
 
 ```kotlin
 // app/build.gradle.kts
@@ -60,27 +81,13 @@ dependencies {
 }
 ```
 
-**2. From your local Maven repository**
+**From your local Maven repository**
 
 ```bash
 ./gradlew :library:publishToMavenLocal
 ```
 
-```kotlin
-// settings.gradle.kts
-dependencyResolutionManagement {
-    repositories {
-        google()
-        mavenCentral()
-        mavenLocal()
-    }
-}
-
-// app/build.gradle.kts
-dependencies {
-    implementation("com.njtech.countrypicker:library:1.0.1")
-}
-```
+Then add `mavenLocal()` to your repositories and depend on `com.njtech.countrypicker:library:1.1.0`.
 
 ## Quick start
 

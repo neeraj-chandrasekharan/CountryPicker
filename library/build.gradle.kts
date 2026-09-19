@@ -77,7 +77,7 @@ afterEvaluate {
                 from(components["release"])
                 groupId = "com.njtech.countrypicker"
                 artifactId = "library"
-                version = "1.0.1"
+                version = "1.1.0"
             }
         }
     }
