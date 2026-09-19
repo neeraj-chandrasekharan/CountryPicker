@@ -2,6 +2,7 @@ package com.njtech.countrypicker.data.repository
 
 import android.content.Context
 import com.njtech.countrypicker.data.model.Country
+import com.njtech.countrypicker.data.model.matches
 import com.njtech.countrypicker.library.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -28,11 +29,7 @@ class CountryRepository(private val context: Context? = null, private val jsonSt
 
     suspend fun searchCountries(query: String): Result<List<Country>> = withContext(Dispatchers.IO) {
         getCountries().map { countries ->
-            countries.filter { country ->
-                country.name.values.any { it.contains(query, ignoreCase = true) } ||
-                        country.code.contains(query, ignoreCase = true) ||
-                        country.dialCode.contains(query, ignoreCase = true)
-            }.sortedBy { it.name["en"] }
+            countries.filter { it.matches(query) }.sortedBy { it.name["en"] }
         }
     }
 }

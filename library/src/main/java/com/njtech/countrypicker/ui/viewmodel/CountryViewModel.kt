@@ -3,6 +3,7 @@ package com.njtech.countrypicker.ui.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.njtech.countrypicker.data.model.Country
+import com.njtech.countrypicker.data.model.matches
 import com.njtech.countrypicker.data.repository.CountryRepository
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -45,10 +46,7 @@ class CountryViewModel(private val repository: CountryRepository) : ViewModel() 
         val filteredCountries = if (query.isBlank()) {
             countries
         } else {
-            countries.filter {
-                (it.name["en"]?.contains(query, ignoreCase = true) == true) ||
-                        it.code.contains(query, ignoreCase = true)
-            }
+            countries.filter { it.matches(query) }
         }
         CountryUiState(
             countries = filteredCountries,

@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.njtech.countrypicker.library"
-    compileSdk = 36
+    compileSdk = 37
 
     defaultConfig {
         minSdk = 29
