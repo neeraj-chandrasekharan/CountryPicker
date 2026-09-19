@@ -10,3 +10,8 @@ data class Country(
     val code: String,
     val flag: String
 )
+
+fun Country.matches(query: String): Boolean =
+    name.values.any { it.contains(query, ignoreCase = true) } ||
+            code.contains(query, ignoreCase = true) ||
+            dialCode.contains(query, ignoreCase = true)
