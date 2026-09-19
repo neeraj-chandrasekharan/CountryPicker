@@ -29,6 +29,7 @@ import com.njtech.countrypicker.ui.screens.CountryListScreen
 import com.njtech.countrypicker.ui.viewmodel.CountryViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlin.time.Duration.Companion.milliseconds
 
 /**
  * A reusable CountryPicker widget that provides an adaptive list-detail interface.
@@ -90,7 +91,7 @@ fun CountryPicker(
                                 if (mode == CountryPickerMode.BottomSheet) {
                                     scope.launch {
                                         sheetState.hide()
-                                        delay(1000)
+                                        delay(1000.milliseconds)
                                         onDismiss?.invoke()
                                     }
                                 }
