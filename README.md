@@ -64,11 +64,11 @@ dependencyResolutionManagement {
 
 // app/build.gradle.kts
 dependencies {
-    implementation("com.github.neeraj-chandrasekharan.CountryPicker:library:1.1.0")
+    implementation("com.github.neeraj-chandrasekharan.CountryPicker:library:1.1.1")
 }
 ```
 
-Versions are the repository's release tags (for example `v1.1.0` is used as `1.1.0`).
+Versions are the repository's release tags (for example `v1.1.1` is used as `1.1.1`).
 
 ### Other options
 
@@ -87,7 +87,7 @@ dependencies {
 ./gradlew :library:publishToMavenLocal
 ```
 
-Then add `mavenLocal()` to your repositories and depend on `com.njtech.countrypicker:library:1.1.0`.
+Then add `mavenLocal()` to your repositories and depend on `com.njtech.countrypicker:library:1.1.1`.
 
 ## Quick start
 
@@ -310,3 +310,7 @@ docs/screenshots/        images used in this README
 ```bash
 ./gradlew :library:testDebugUnitTest
 ```
+
+## License
+
+MIT. See [LICENSE](LICENSE).
